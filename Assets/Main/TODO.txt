@@ -1,0 +1,3 @@
+CHANGES: Uzmeciau 'Player' taga ant ant tavo 'Player' prefabu reikejo mano scriptui
+
+TODO:

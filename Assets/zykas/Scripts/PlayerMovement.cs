@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour {
     public float speed = 10.0f;
     bool canJump = true;
     public float jumpForce=250;
-	void Update () {
+	void FixedUpdate () {
         float translation = Input.GetAxis("Horizontal") * speed;
         translation *= Time.deltaTime;
         transform.Translate(translation, 0, 0);
