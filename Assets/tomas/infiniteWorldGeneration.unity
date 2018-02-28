@@ -565,7 +565,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ground: {fileID: 1864917982710052, guid: 5882a2f3f09f4644d976d6eaaf430dde, type: 2}
   posOffsetX: -40
-  generationFurther: 15
+  tileGenerationAmount: 15
+  tileClone: []
   posToGenerateFrom: 5
 --- !u!4 &2049569820
 Transform:

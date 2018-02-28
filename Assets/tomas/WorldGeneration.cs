@@ -7,18 +7,15 @@ public class WorldGeneration : MonoBehaviour {
     public GameObject ground;
     private GameObject lastTile;
 
-    public float posOffsetX = -20.0f;
+    public float posOffsetX = -40.0f;
     private Vector3 pos;
 
     private GameObject mainPlayer;
-
-    public int generationFurther = 3;
+    public int tileGenerationAmount = 15;
+    public List<GameObject> tileClone = new List<GameObject>();
+    private int currId = 0;
     public float posToGenerateFrom = 5.0f;
     private float groundSizeX;
-
-    /*private Camera mainCamera;
-    public Vector2 widthThresold;
-    public Vector2 heightThresold;*/
 
     void Awake () {
         //Find main player, FUTURE CHANGES: find all players
@@ -29,13 +26,14 @@ public class WorldGeneration : MonoBehaviour {
         Bounds bounds = mesh.bounds;
         groundSizeX = mesh.bounds.size.x * ground.transform.localScale.x;
         
-
         //Generate the base ground
         pos = new Vector3(posOffsetX, 0, 0);
-        for(int i = 0; i < generationFurther; i++)
+        for(int i = 0; i < tileGenerationAmount; i++)
         {
             GameObject clone;
             clone = Instantiate(ground, pos, Quaternion.identity) as GameObject;
+            tileClone.Add(clone);
+            currId++;
             posOffsetX += groundSizeX;
             pos = new Vector3(posOffsetX, 0, 0);
         }
@@ -48,16 +46,17 @@ public class WorldGeneration : MonoBehaviour {
         {
             GameObject clone;
             clone = Instantiate(ground, pos, Quaternion.identity) as GameObject;
+            tileClone.Add(clone);
+            currId++;
             posToGenerateFrom += groundSizeX;
             posOffsetX += groundSizeX;
             pos = new Vector3(posOffsetX, 0, 0);
 
-
-            
+            //Delete previous tiles
+            Destroy(tileClone[0].gameObject);
+            tileClone.RemoveAt(0);
         }
-        //Delete previous tiles
-        /*Vector2 screenPosition = mainCamera.WorldToScreenPoint(transform.position);
-        if (screenPosition.x < widthThresold.x || screenPosition.x > widthThresold.y || screenPosition.y < heightThresold.x || screenPosition.y > heightThresold.y)
-            Destroy(gameObject);*/
+
+
     }
 }
