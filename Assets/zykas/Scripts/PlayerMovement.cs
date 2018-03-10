@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+[RequireComponent (typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour {
 
     CharacterController character;
@@ -35,10 +37,6 @@ public class PlayerMovement : MonoBehaviour {
         
         moveDirection.y -= gravity * Time.deltaTime;
         character.Move(moveDirection * Time.deltaTime);
-        Debug.Log(Time.deltaTime);
-
-
-
     }
 
 }
