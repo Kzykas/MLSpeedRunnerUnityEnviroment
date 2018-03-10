@@ -4,35 +4,42 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
 
-    public float speed = 10.0f;
-    bool canJump = true;
-    public float jumpForce=250;
-	void Update () {
-        float translation = Input.GetAxis("Horizontal") * speed;
-        translation *= Time.deltaTime;
-        transform.Translate(translation, 0, 0);
+    CharacterController character;
+    private Vector3 moveDirection = Vector3.zero;
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            
-            jump();
-        }
-	}
 
-    void jump()
+    public float speed = 10f;
+    public float jumpSpeed = 10f;
+    public float gravity = 20f;
+    private void Start()
     {
-        if (canJump)
-        {
-            canJump = false;
-            GetComponent<Rigidbody>().AddForce(this.gameObject.transform.up * jumpForce);
-        }
+        character = GetComponent<CharacterController>();
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.layer == 0)
-        {
-            canJump=true;
+    void Update() {
+        
+        
+        if (character.isGrounded){
+            moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, 0);
+            moveDirection = transform.TransformDirection(moveDirection);
+            moveDirection *= speed;
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                moveDirection.y = jumpSpeed;
+            }
         }
+        if (!character.isGrounded) 
+        {
+            moveDirection.x = Input.GetAxis("Horizontal") * speed;
+            moveDirection = transform.TransformDirection(moveDirection);
+        }
+        
+        moveDirection.y -= gravity * Time.deltaTime;
+        character.Move(moveDirection * Time.deltaTime);
+        Debug.Log(Time.deltaTime);
+
+
+
     }
+
 }
