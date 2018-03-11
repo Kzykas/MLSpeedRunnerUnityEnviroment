@@ -432,7 +432,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8497ec9bd382cc468fb81734329ead8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraOffsetZ: -10
+  cameraOffsetZ: 10
 --- !u!1 &337023460 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1018580663352086, guid: 301c6133f3e154d47a01e5f94530628c,
