@@ -7,8 +7,8 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour {
 
     CharacterController character;
-    private Vector3 moveDirection = Vector3.zero;
-
+    public Vector3 moveDirection = Vector3.zero;
+    public int frameJumpLatency;
     public float speed = 10f;
     public float jumpSpeed = 10f;
     public float gravity = 20f;
@@ -18,9 +18,9 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     void Update() {
-        
-        
-        if (character.isGrounded){
+
+        if (character.isGrounded) {
+            frameJumpLatency = 0;
             moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, 0);
             moveDirection = transform.TransformDirection(moveDirection);
             moveDirection *= speed;
@@ -29,7 +29,15 @@ public class PlayerMovement : MonoBehaviour {
                 moveDirection.y = jumpSpeed;
             }
         }
-        if (!character.isGrounded) 
+        else if (frameJumpLatency < 10)
+        {
+            frameJumpLatency++;
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                moveDirection.y = jumpSpeed;
+            }
+        }
+        else
         {
             moveDirection.x = Input.GetAxis("Horizontal") * speed;
             moveDirection = transform.TransformDirection(moveDirection);
