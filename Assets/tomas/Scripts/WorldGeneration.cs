@@ -112,10 +112,6 @@ public class WorldGeneration : MonoBehaviour {
             else
                 GenerateSegments(segments[0], tileClone[tileClone.Count - 1], segmentSizesX[0]);
         }
-        for(int i = 0; i < spawnId.Length; i++)
-        {
-            Debug.Log("SpawnID" + spawnId[i]);
-        }
 	}
 	
 	void Update () {
@@ -125,7 +121,6 @@ public class WorldGeneration : MonoBehaviour {
             int randomBlock;
 
             random = Random.Range(0, totalChance);
-            Debug.Log("Random range is: " + random);
             for (int i = 0; i < segmentsSpawnChanceSum.Length; i++)
             {
                 if (i == 0)
@@ -133,7 +128,6 @@ public class WorldGeneration : MonoBehaviour {
                     if (random >= 0 && random < segmentsSpawnChanceSum[i])
                     {
                         randomBlock = i;
-                        Debug.Log("if i == 0, Random block id: " + randomBlock + " segmentsSpawnChanceSum is: " + segmentsSpawnChanceSum[i]);
                         GenerateSegments(segments[randomBlock], tileClone[tileClone.Count - 1], segmentSizesX[randomBlock]);
                     }
                 }
@@ -143,7 +137,6 @@ public class WorldGeneration : MonoBehaviour {
                     {
 
                         randomBlock = i;
-                        Debug.Log("Random block id: " + randomBlock + " segmentsSpawnChanceSum is: " + segmentsSpawnChanceSum[i]);
                         GenerateSegments(segments[randomBlock], tileClone[tileClone.Count - 1], segmentSizesX[randomBlock]);
                     }
                 }
