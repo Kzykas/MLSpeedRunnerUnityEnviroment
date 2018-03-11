@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour {
     public float speed = 10f;
     public float jumpSpeed = 10f;
     public float gravity = 20f;
+    int jumpCount = 0;
     private void Start()
     {
         character = GetComponent<CharacterController>();
@@ -20,25 +21,29 @@ public class PlayerMovement : MonoBehaviour {
     void Update() {
 
         if (character.isGrounded) {
+            jumpCount=0;
             frameJumpLatency = 0;
             moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, 0);
             moveDirection = transform.TransformDirection(moveDirection);
             moveDirection *= speed;
             if (Input.GetKeyDown(KeyCode.Space))
             {
+                jumpCount++;
                 moveDirection.y = jumpSpeed;
             }
         }
-        else if (frameJumpLatency < 10)
+        else if (frameJumpLatency < 10 && jumpCount==0)
         {
             frameJumpLatency++;
             if (Input.GetKeyDown(KeyCode.Space))
             {
+                jumpCount++;
                 moveDirection.y = jumpSpeed;
             }
         }
         else
         {
+            jumpCount++;
             moveDirection.x = Input.GetAxis("Horizontal") * speed;
             moveDirection = transform.TransformDirection(moveDirection);
         }
