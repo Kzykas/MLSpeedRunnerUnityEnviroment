@@ -29,7 +29,8 @@ public class WorldGeneration : MonoBehaviour {
     public float startTileDeletionFrom = 10.0f;
     float elementDeletionPos;
 
-    private List<GameObject> tileClone = new List<GameObject>();
+    [HideInInspector]
+    public List<GameObject> tileClone = new List<GameObject>();
     private float posToGenerateFrom = 0.0f;
 
     public bool hasSpaces;
@@ -115,40 +116,43 @@ public class WorldGeneration : MonoBehaviour {
 	}
 	
 	void Update () {
-        if (mainPlayer.transform.position.x > posToGenerateFrom)
+        if(mainPlayer != null)
         {
-            //Generate further tiles
-            int randomBlock;
-
-            random = Random.Range(0, totalChance);
-            for (int i = 0; i < segmentsSpawnChanceSum.Length; i++)
+            if (mainPlayer.transform.position.x > posToGenerateFrom)
             {
-                if (i == 0)
-                {
-                    if (random >= 0 && random < segmentsSpawnChanceSum[i])
-                    {
-                        randomBlock = i;
-                        GenerateSegments(segments[randomBlock], tileClone[tileClone.Count - 1], segmentSizesX[randomBlock]);
-                    }
-                }
-                else
-                {
-                    if (random >= segmentsSpawnChanceSum[i - 1] && random < segmentsSpawnChanceSum[i])
-                    {
+                //Generate further tiles
+                int randomBlock;
 
-                        randomBlock = i;
-                        GenerateSegments(segments[randomBlock], tileClone[tileClone.Count - 1], segmentSizesX[randomBlock]);
+                random = Random.Range(0, totalChance);
+                for (int i = 0; i < segmentsSpawnChanceSum.Length; i++)
+                {
+                    if (i == 0)
+                    {
+                        if (random >= 0 && random < segmentsSpawnChanceSum[i])
+                        {
+                            randomBlock = i;
+                            GenerateSegments(segments[randomBlock], tileClone[tileClone.Count - 1], segmentSizesX[randomBlock]);
+                        }
+                    }
+                    else
+                    {
+                        if (random >= segmentsSpawnChanceSum[i - 1] && random < segmentsSpawnChanceSum[i])
+                        {
+
+                            randomBlock = i;
+                            GenerateSegments(segments[randomBlock], tileClone[tileClone.Count - 1], segmentSizesX[randomBlock]);
+                        }
                     }
                 }
+                globalLength = posOffsetX;
             }
-            globalLength = posOffsetX;
-        }
-		
-        if (mainPlayer.transform.position.x > tileClone[0].transform.position.x + startTileDeletionFrom)
-        {
-            //Delete previous tiles
-            Destroy(tileClone[0].gameObject);
-            tileClone.RemoveAt(0);
+
+            if (mainPlayer.transform.position.x > tileClone[0].transform.position.x + startTileDeletionFrom)
+            {
+                //Delete previous tiles
+                Destroy(tileClone[0].gameObject);
+                tileClone.RemoveAt(0);
+            }
         }
     }
 

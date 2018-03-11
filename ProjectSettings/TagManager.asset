@@ -8,6 +8,7 @@ TagManager:
   - iWall
   - obstacle
   - Death
+  - MainGenerator
   layers:
   - Default
   - TransparentFX
