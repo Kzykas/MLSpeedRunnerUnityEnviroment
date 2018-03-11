@@ -5,10 +5,13 @@ using UnityEngine;
 public class PlayerInteraction : MonoBehaviour {
 
     PlayerMovement playerMovement;
-    public float slowDuration = 5f;
+    public float slowSpeed = 5f;
+    public float slowDuration = 2.0f;
+    float normalSpeed;
 
     void Start () {
         playerMovement = GetComponent<PlayerMovement>();
+        normalSpeed = playerMovement.speed;
 	}
 	
 	// Update is called once per frame
@@ -31,16 +34,14 @@ public class PlayerInteraction : MonoBehaviour {
         {
             Destroy(hit.gameObject);
             StartCoroutine(slowTimeDuration());
-
         }
     }
 
 
     IEnumerator slowTimeDuration()
     {
-        float tempSpeed = playerMovement.speed;
-        playerMovement.speed = slowDuration;
-        yield return new WaitForSeconds( 2.0f);
-        playerMovement.speed = tempSpeed;
+        playerMovement.speed = slowSpeed;
+        yield return new WaitForSeconds( slowDuration);
+        playerMovement.speed = normalSpeed;
     }
 }
