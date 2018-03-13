@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class WorldGeneration : MonoBehaviour {
+    WorldGeneration mainWorldGeneration;
+    GameObject mainGenerator;
+
     public GameManager gameManager;
     float globalLength;
     float staticGlobalLength;
@@ -39,7 +42,13 @@ public class WorldGeneration : MonoBehaviour {
     [HideInInspector]
     public float gapMaxDistance = 10;
 
+    public bool getMainGeneratorStats = false;
+    public GameObject[] dontSpawnInObjectArea;
+
     void Start () {
+        mainGenerator = GameObject.FindGameObjectWithTag("MainGenerator");
+        mainWorldGeneration = mainGenerator.GetComponent<WorldGeneration>();
+
         //Assign game manager if null
         if (gameManager == null)
         {
@@ -172,13 +181,42 @@ public class WorldGeneration : MonoBehaviour {
                 randomBetweenValues = 0;
             else
                 randomBetweenValues = Random.Range(gapMinDistance, gapMaxDistance);
-            GameObject clone;
-            clone = Instantiate(spawnObject, pos, Quaternion.identity) as GameObject;
-            clone.transform.parent = gameObject.transform;
-            tileClone.Add(clone);
-            posOffsetX += objectSize + randomBetweenValues;
-            posToGenerateFrom = previousObject.transform.position.x + objectSize + randomBetweenValues - staticGlobalLength;
-            pos = new Vector3(posOffsetX, posOffsetY, posOffsetZ);
+            if(getMainGeneratorStats == false) 
+            {
+                GameObject clone;
+                clone = Instantiate(spawnObject, pos, Quaternion.identity) as GameObject;
+                clone.transform.parent = gameObject.transform;
+                tileClone.Add(clone);
+                posOffsetX += objectSize + randomBetweenValues;
+                posToGenerateFrom = previousObject.transform.position.x + objectSize + randomBetweenValues - staticGlobalLength;
+                pos = new Vector3(posOffsetX, posOffsetY, posOffsetZ);
+            }
+            else //We check if an object can be created in a specific area
+            {
+                RaycastHit hit;
+                Vector3 dir = transform.TransformDirection(Vector3.down) * 100;
+                if (Physics.Raycast(pos, dir, out hit))
+                {
+                    Debug.DrawRay(pos, dir, Color.green);
+                    for (int i = 0; i < dontSpawnInObjectArea.Length; i++)
+                    {
+                        if (hit.collider.gameObject.name != (dontSpawnInObjectArea[i].name+"(Clone)") || hit.collider.tag != "Death")
+                        {
+                            GameObject clone;
+                            clone = Instantiate(spawnObject, pos, Quaternion.identity) as GameObject;
+                            clone.transform.parent = gameObject.transform;
+                            tileClone.Add(clone);
+                            posOffsetX += objectSize + randomBetweenValues;
+                            posToGenerateFrom = previousObject.transform.position.x + objectSize + randomBetweenValues - staticGlobalLength;
+                            pos = new Vector3(posOffsetX, posOffsetY, posOffsetZ);
+                        }
+                        else
+                        {
+                            Debug.Log("Name match");
+                        }
+                    }
+                }
+            }
         }
     }
 
