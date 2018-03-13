@@ -123,5 +123,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ca187502f92bfc4eb6c8dbdf095674f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveDirection: {x: 0, y: 0, z: 0}
+  frameJumpLatency: 0
   speed: 10
-  jumpForce: 250
+  jumpSpeed: 10
+  gravity: 20

@@ -8,18 +8,26 @@ public class CameraObjectFollow : MonoBehaviour {
     public float maxLastTileDistance = 30.0f;
     public Vector3 cameraStaticPosition;
     private float cameraOffsetZ = 10.0f;
-    float greatestDistance;
+    public float greatestDistance;
     float aspectRatio;
     float tanFov;
     Vector3 centerOfVectors;
-    List<GameObject> players = new List<GameObject>();
+    //[HideInInspector]
+    public List<GameObject> players = new List<GameObject>();
+    GameObject furthestObject;
     float minVector;
     float maxVector;
 
     WorldGeneration worldGeneration;
     GameObject generationObject;
 
+    private GameObject mainCamera;
+    SmoothFollow smoothFollow;
+
     void Start () {
+        mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+        smoothFollow = mainCamera.GetComponent<SmoothFollow>();
+
         generationObject = GameObject.FindGameObjectWithTag("MainGenerator");
         worldGeneration = generationObject.GetComponent<WorldGeneration>();
 
@@ -41,44 +49,58 @@ public class CameraObjectFollow : MonoBehaviour {
 	
 	void Update () {
         aspectRatio = Screen.width / Screen.height;
-        greatestDistance = Distance(players, players.Count-1);
+        if (players.Count > 1)
+            greatestDistance = Distance(players);
         CenterOfVectors(players);
         centerOfVectors.x = (minVector + maxVector) / 2;
-        Debug.Log("min x is: " + minVector + ", max x is: " + maxVector);
-        cameraOffsetZ = ((greatestDistance + cameraStaticPosition.x) / 2 / aspectRatio) / tanFov;
+        cameraOffsetZ = ((greatestDistance + cameraStaticPosition.x + smoothFollow.postionOffset.x) / 2 / aspectRatio) / tanFov;
 
         if(centerOfVectors.x + maxLastTileDistance*(-1) >= worldGeneration.tileClone[0].transform.position.x)
         {
-            if (cameraOffsetZ <= maxZoomOutDistance)
-                transform.position = cameraStaticPosition + new Vector3(centerOfVectors.x, 0, cameraOffsetZ * (-1));
-            else
-                transform.position = cameraStaticPosition + new Vector3(centerOfVectors.x, 0, maxZoomOutDistance * (-1));
+            if (players.Count > 1)
+            {
+                if (cameraOffsetZ <= maxZoomOutDistance)
+                {
+                    transform.position = cameraStaticPosition + new Vector3(centerOfVectors.x, 0, cameraOffsetZ * (-1));
 
-            if (cameraOffsetZ <= maxZoomInDistance)
+                }
+                else
+                {
+                    transform.position = cameraStaticPosition + new Vector3(centerOfVectors.x, 0, maxZoomOutDistance * (-1));
+                }
+            }
+            else
                 transform.position = cameraStaticPosition + new Vector3(centerOfVectors.x, 0, maxZoomInDistance * (-1));
+
         }
         else
         {
-            if (cameraOffsetZ <= maxZoomOutDistance)
-                transform.position = new Vector3(transform.position.x, transform.position.y, cameraOffsetZ * (-1));
-            else
+            //if (cameraOffsetZ <= maxZoomOutDistance)
+              //  transform.position = new Vector3(transform.position.x, transform.position.y, cameraOffsetZ * (-1));
+            //else
                 transform.position = new Vector3(transform.position.x, transform.position.y, maxZoomOutDistance * (-1));
         }
-
     }
 
-    float Distance(List<GameObject> objects, int index)
+    float Distance(List<GameObject> objects)
     {
         List<float> distances = new List<float>();
-        foreach (GameObject obj in objects)
+
+        for(int i = 0; i < objects.Count; i++)
         {
-            float dist = Vector3.Distance(gameObject.transform.position, obj.transform.position);
-            distances.Add(dist);
+            for(int j = 0; j < objects.Count; j++)
+            {
+                if(i != j)
+                {
+                    float dist = Mathf.Abs(objects[i].transform.position.x - objects[j].transform.position.x);
+                    distances.Add(dist);
+                }
+            }
         }
 
         distances.Sort();
-
-        return distances[index];
+        
+        return distances[distances.Count-1];
     }
 
     void CenterOfVectors(List<GameObject> objects)
@@ -87,7 +109,11 @@ public class CameraObjectFollow : MonoBehaviour {
         maxVector = -9999.0f;
         for (int i = 0; i < objects.Count; i++)
         {
-            minVector = (objects[i].transform.position.x < minVector) ? objects[i].transform.position.x : minVector;
+            if (objects[i].transform.position.x < minVector)
+            {
+                minVector = objects[i].transform.position.x;
+                furthestObject = objects[i];
+            }
             maxVector = (objects[i].transform.position.x > maxVector) ? objects[i].transform.position.x : maxVector;
         }
     }

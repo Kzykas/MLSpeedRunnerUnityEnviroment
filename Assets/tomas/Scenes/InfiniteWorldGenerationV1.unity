@@ -191,6 +191,10 @@ Prefab:
       propertyPath: m_Name
       value: player4
       objectReference: {fileID: 0}
+    - target: {fileID: 1018580663352086, guid: 301c6133f3e154d47a01e5f94530628c, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 54129910060441498, guid: 301c6133f3e154d47a01e5f94530628c, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 301c6133f3e154d47a01e5f94530628c, type: 2}
@@ -272,6 +276,10 @@ Prefab:
     - target: {fileID: 1018580663352086, guid: 301c6133f3e154d47a01e5f94530628c, type: 2}
       propertyPath: m_Name
       value: player3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1018580663352086, guid: 301c6133f3e154d47a01e5f94530628c, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 54129910060441498, guid: 301c6133f3e154d47a01e5f94530628c, type: 2}
@@ -415,7 +423,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 235935429}
   m_LocalRotation: {x: -0, y: -0, z: 2.9345525e-23, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0.2, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -836,7 +844,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1792409011
 Transform:
   m_ObjectHideFlags: 0
@@ -864,17 +872,19 @@ MonoBehaviour:
   gameManager: {fileID: 2049569819}
   segments:
   - {fileID: 1857983284393598, guid: 7889065192cfdf74b80d34980b57cfea, type: 2}
+  - {fileID: 1686883675508378, guid: 74e5d1d18a6f1624c813cffe578b7480, type: 2}
   segmentsSpawnChance:
   - 1
+  - 1
   posOffsetX: -40
-  posOffsetY: 5
+  posOffsetY: 10
   posOffsetZ: 0
   firstTileGenerationAmount: 15
   startTileDeletionFrom: 150
   tileClone: []
-  hasSpaces: 0
+  hasSpaces: 1
   gapMinDistance: 20
-  gapMaxDistance: 500
+  gapMaxDistance: 50
 --- !u!1001 &1873079839
 Prefab:
   m_ObjectHideFlags: 0
@@ -1034,6 +1044,10 @@ Prefab:
     - target: {fileID: 1018580663352086, guid: 301c6133f3e154d47a01e5f94530628c, type: 2}
       propertyPath: m_Name
       value: player2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1018580663352086, guid: 301c6133f3e154d47a01e5f94530628c, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 54129910060441498, guid: 301c6133f3e154d47a01e5f94530628c, type: 2}

@@ -154,6 +154,13 @@ public class WorldGeneration : MonoBehaviour {
                 tileClone.RemoveAt(0);
             }
         }
+        else
+        {
+            if (GameObject.FindGameObjectWithTag("Player") != null)
+                mainPlayer = GameObject.FindGameObjectWithTag("Player");
+            else
+                Debug.Log("All players dead");
+        }
     }
 
     void GenerateSegments(GameObject spawnObject, GameObject previousObject, float objectSize)
