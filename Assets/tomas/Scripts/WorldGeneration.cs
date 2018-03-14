@@ -43,6 +43,7 @@ public class WorldGeneration : MonoBehaviour {
     public float gapMaxDistance = 10;
 
     public bool getMainGeneratorStats = false;
+    
     public GameObject[] dontSpawnInObjectArea;
 
     void Start () {
@@ -193,6 +194,7 @@ public class WorldGeneration : MonoBehaviour {
             }
             else //We check if an object can be created in a specific area
             {
+                bool canSpawn = true;
                 RaycastHit hit;
                 Vector3 dir = transform.TransformDirection(Vector3.down) * 100;
                 if (Physics.Raycast(pos, dir, out hit))
@@ -200,20 +202,29 @@ public class WorldGeneration : MonoBehaviour {
                     Debug.DrawRay(pos, dir, Color.green);
                     for (int i = 0; i < dontSpawnInObjectArea.Length; i++)
                     {
-                        if (hit.collider.gameObject.name != (dontSpawnInObjectArea[i].name+"(Clone)") || hit.collider.tag != "Death")
+                        if(hit.collider.gameObject.name == (dontSpawnInObjectArea[i].name + "(Clone)") || hit.collider.tag == "Death")
                         {
-                            GameObject clone;
-                            clone = Instantiate(spawnObject, pos, Quaternion.identity) as GameObject;
-                            clone.transform.parent = gameObject.transform;
-                            tileClone.Add(clone);
-                            posOffsetX += objectSize + randomBetweenValues;
-                            posToGenerateFrom = previousObject.transform.position.x + objectSize + randomBetweenValues - staticGlobalLength;
-                            pos = new Vector3(posOffsetX, posOffsetY, posOffsetZ);
+                            canSpawn = false;
                         }
-                        else
-                        {
-                            Debug.Log("Name match");
-                        }
+                    }
+
+                    if(canSpawn == true)
+                    {
+                        GameObject clone;
+                        clone = Instantiate(spawnObject, pos, Quaternion.identity) as GameObject;
+                        clone.transform.parent = gameObject.transform;
+                        tileClone.Add(clone);
+                        posOffsetX += objectSize + randomBetweenValues;
+                        posToGenerateFrom = previousObject.transform.position.x + objectSize + randomBetweenValues - staticGlobalLength;
+                        pos = new Vector3(posOffsetX, posOffsetY, posOffsetZ);
+
+                        //Debug.Log("Hit.collider.gameObject.name = " + hit.collider.gameObject.name + ", dontSpawnInObjectArea[i].name = " + dontSpawnInObjectArea[i].name);
+                    }
+                    else
+                    {
+                        posOffsetX += objectSize + randomBetweenValues;
+                        posToGenerateFrom = previousObject.transform.position.x + objectSize + randomBetweenValues - staticGlobalLength;
+                        pos = new Vector3(posOffsetX, posOffsetY, posOffsetZ);
                     }
                 }
             }

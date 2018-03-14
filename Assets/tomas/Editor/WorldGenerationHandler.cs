@@ -34,5 +34,12 @@ public class WorldGenerationEditor : Editor
             worldGeneration.gapMinDistance = EditorGUILayout.FloatField("Minimum distance", worldGeneration.gapMinDistance);
             worldGeneration.gapMaxDistance = EditorGUILayout.FloatField("Maximum distance", worldGeneration.gapMaxDistance);
         }
+
+        
+        if(worldGeneration.getMainGeneratorStats == false)
+        {
+            int size = 0;
+            System.Array.Resize(ref worldGeneration.dontSpawnInObjectArea, size);
+        }
     }
 }

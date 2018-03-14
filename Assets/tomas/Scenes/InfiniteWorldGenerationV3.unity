@@ -974,7 +974,7 @@ MonoBehaviour:
   posOffsetX: 0
   posOffsetY: 10
   posOffsetZ: 0
-  firstTileGenerationAmount: 15
+  firstTileGenerationAmount: 2
   startTileDeletionFrom: 150
   tileClone: []
   hasSpaces: 1
