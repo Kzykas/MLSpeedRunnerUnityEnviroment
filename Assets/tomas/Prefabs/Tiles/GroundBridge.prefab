@@ -57,6 +57,7 @@ GameObject:
   - component: {fileID: 23952931522550428}
   - component: {fileID: 65317918336343928}
   - component: {fileID: 65347425467334546}
+  - component: {fileID: 114104028155649024}
   m_Layer: 0
   m_Name: GroundBridge
   m_TagString: Untagged
@@ -71,7 +72,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1270062246613632}
   m_LocalRotation: {x: 0.00000009304265, y: 0.7071081, z: 0.70710546, w: -0.00012915143}
-  m_LocalPosition: {x: 0.17858547, y: 0.057967305, z: 0.012039309}
+  m_LocalPosition: {x: 0.179, y: 0.16, z: 0.01}
   m_LocalScale: {x: 0.023854746, y: 1.1927373, z: 1.1927373}
   m_Children: []
   m_Father: {fileID: 4362154112900434}
@@ -84,7 +85,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1740415366662812}
   m_LocalRotation: {x: 6.7372124e-12, y: 1, z: -0.0000018099951, w: 0.0000036517765}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 15.363711, y: 25.779118, z: -29.264526}
   m_LocalScale: {x: 25, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 4908284354947850}
@@ -255,3 +256,14 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.5319858, y: 0.47598505, z: 3.8452964}
   m_Center: {x: 0.8556285, y: 0.22097468, z: -0.00012481214}
+--- !u!114 &114104028155649024
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1740415366662812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3406c0a4d0109e409f26d5d6af85d71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

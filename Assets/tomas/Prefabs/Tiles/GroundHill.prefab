@@ -22,6 +22,10 @@ GameObject:
   - component: {fileID: 33057616140923446}
   - component: {fileID: 23321087800594994}
   - component: {fileID: 65844151450608514}
+  - component: {fileID: 114814135598015446}
+  - component: {fileID: 114544326359378406}
+  - component: {fileID: 114124128845018994}
+  - component: {fileID: 114163360215196976}
   m_Layer: 0
   m_Name: GroundHill
   m_TagString: Untagged
@@ -96,3 +100,64 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.9986022, y: 22.429762, z: 4.4884357}
   m_Center: {x: 0.9992727, y: -5.2148676, z: -0.00062942505}
+--- !u!114 &114124128845018994
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1318611322111656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3406c0a4d0109e409f26d5d6af85d71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114163360215196976
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1318611322111656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3cf0b13d64141d4b9b9f7b9eef95788, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  navMeshLink: {fileID: 0}
+--- !u!114 &114544326359378406
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1318611322111656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6eeb5dc026fdf4b488bc7ae0138ab719, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_StartPoint: {x: 49.535248, y: 2.9265697, z: 0.015878098}
+  m_EndPoint: {x: 54.56891, y: -3.245508e-13, z: -0.043829832}
+  m_Width: 0
+  m_CostModifier: -1
+  m_Bidirectional: 1
+  m_AutoUpdatePosition: 0
+  m_Area: 0
+--- !u!114 &114814135598015446
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1318611322111656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6eeb5dc026fdf4b488bc7ae0138ab719, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_StartPoint: {x: 0.48080492, y: 2.953704, z: 0.06418188}
+  m_EndPoint: {x: -3.4805455, y: -0.05088663, z: -0.064169645}
+  m_Width: 0
+  m_CostModifier: -1
+  m_Bidirectional: 1
+  m_AutoUpdatePosition: 0
+  m_Area: 0
