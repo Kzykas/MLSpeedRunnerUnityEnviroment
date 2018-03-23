@@ -9,7 +9,7 @@ public class SmoothFollow : MonoBehaviour {
 
     public Vector3 postionOffset;
 
-    void Start()
+    void Awake()
     {
         transform.position = target.transform.position;
     }

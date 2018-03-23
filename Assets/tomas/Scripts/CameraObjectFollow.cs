@@ -24,7 +24,7 @@ public class CameraObjectFollow : MonoBehaviour {
     private GameObject mainCamera;
     SmoothFollow smoothFollow;
 
-    void Start () {
+    void Awake () {
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
         smoothFollow = mainCamera.GetComponent<SmoothFollow>();
 

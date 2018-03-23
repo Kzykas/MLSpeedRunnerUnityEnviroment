@@ -18,7 +18,8 @@ public class WorldGeneration : MonoBehaviour {
     float random;
     int[] spawnId;
 
-    private GameObject lastTile;
+    [HideInInspector]
+    public GameObject lastTile;
     float[] segmentSizesX;
 
     public float posOffsetX = -40.0f;
@@ -191,6 +192,7 @@ public class WorldGeneration : MonoBehaviour {
                 posOffsetX += objectSize + randomBetweenValues;
                 posToGenerateFrom = previousObject.transform.position.x + objectSize + randomBetweenValues - staticGlobalLength;
                 pos = new Vector3(posOffsetX, posOffsetY, posOffsetZ);
+                lastTile = clone;
             }
             else //We check if an object can be created in a specific area
             {
@@ -217,8 +219,7 @@ public class WorldGeneration : MonoBehaviour {
                         posOffsetX += objectSize + randomBetweenValues;
                         posToGenerateFrom = previousObject.transform.position.x + objectSize + randomBetweenValues - staticGlobalLength;
                         pos = new Vector3(posOffsetX, posOffsetY, posOffsetZ);
-
-                        //Debug.Log("Hit.collider.gameObject.name = " + hit.collider.gameObject.name + ", dontSpawnInObjectArea[i].name = " + dontSpawnInObjectArea[i].name);
+                        lastTile = clone;
                     }
                     else
                     {
