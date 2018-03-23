@@ -8,14 +8,16 @@ public class DirectedAgent : MonoBehaviour
 {
     public WorldGeneration mainWorldGeneration;
     private Vector3 destination;
+    private Vector3 prevDestination;
     private NavMeshAgent agent;
+
+    public float moveByXamount = 10.0f;
 
     private bool startMovement = false;
 
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        destination = transform.position + new Vector3(30.0f, 0, 0);
         Invoke("StartMovement", 1.0f);
     }
 
@@ -31,8 +33,20 @@ public class DirectedAgent : MonoBehaviour
     }
     void NewDestinationMove()
     {
-        destination = transform.position + new Vector3(30.0f, 0, 0);
+        
+        destination = transform.position + new Vector3(moveByXamount, 0, 0);
         agent.destination = destination;
+        if(true)
+        {
+            if (prevDestination == destination) //This is to prevent random stuck points
+            {
+                if(moveByXamount <= 30)
+                    moveByXamount++;
+                else
+                    moveByXamount--;
+            } 
+        }
+        prevDestination = destination;
         /*if (Vector3.Distance(transform.position, destination) > 1.0f)
         {
             agent.destination = destination;

@@ -1,4 +1,4 @@
-#if UNITY_EDITOR || UNITY_STANDALONE
+/*#if UNITY_EDITOR || UNITY_STANDALONE
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.TestTools;
@@ -143,3 +143,4 @@ public class NavMeshSurfaceLinkTests
     }
 }
 #endif
+*/

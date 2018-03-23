@@ -1,4 +1,5 @@
-#if UNITY_EDITOR || UNITY_STANDALONE
+//Test tools do not exist when building. Commenting out.
+/*#if UNITY_EDITOR || UNITY_STANDALONE
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.TestTools;
@@ -43,7 +44,7 @@ public class NavMeshSurfaceAgentTests
         GameObject.DestroyImmediate(surface.gameObject);
     }
 
-/*
+
     [Test]
     public void AgentIsOnNavMeshWhenMatchingAgentTypeID()
     {
@@ -60,7 +61,6 @@ public class NavMeshSurfaceAgentTests
         GameObject.DestroyImmediate(agent.gameObject);
         GameObject.DestroyImmediate(surface.gameObject);
     }
-*/
 
     [UnityTest]
     public IEnumerator AgentAlignsToSurfaceNextFrame()
@@ -100,3 +100,4 @@ public class NavMeshSurfaceAgentTests
     }
 }
 #endif
+*/
