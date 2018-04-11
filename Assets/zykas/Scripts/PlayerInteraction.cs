@@ -8,11 +8,13 @@ public class PlayerInteraction : MonoBehaviour {
     public float slowSpeed = 5f;
     public float slowDuration = 2.0f;
     float normalSpeed;
-
+    CameraObjectFollow cameraObjecFollow;
+    public GameObject cameraOrPivot;
     void Start () {
         playerMovement = GetComponent<PlayerMovement>();
         normalSpeed = playerMovement.speed;
-	}
+        cameraObjecFollow = cameraOrPivot.GetComponent<CameraObjectFollow>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -24,6 +26,7 @@ public class PlayerInteraction : MonoBehaviour {
         if(other.tag == "Death")
         {
             Destroy(gameObject);
+            cameraObjecFollow.players.Remove(gameObject);
         }
     }
 
