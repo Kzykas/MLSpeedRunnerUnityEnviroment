@@ -21,5 +21,8 @@ EditorBuildSettings:
     path: Assets/NumberDemo/NumberDemo.unity
     guid: d6069d679fd0f0d42b85f91f670fe48a
   - enabled: 1
+    path: Assets/zykas/1.Menu.unity
+    guid: 2a739b7a7732be847a9cad5d0ab1f275
+  - enabled: 1
     path: Assets/tomas/Scenes/NavigationWorld.unity
     guid: 71e8150e9a319644b8f668c13255a2eb

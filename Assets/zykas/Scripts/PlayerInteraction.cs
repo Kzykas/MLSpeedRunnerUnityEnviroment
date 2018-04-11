@@ -10,6 +10,7 @@ public class PlayerInteraction : MonoBehaviour {
     float normalSpeed;
     CameraObjectFollow cameraObjecFollow;
     public GameObject cameraOrPivot;
+
     void Start () {
         playerMovement = GetComponent<PlayerMovement>();
         normalSpeed = playerMovement.speed;
@@ -36,6 +37,7 @@ public class PlayerInteraction : MonoBehaviour {
         if(hit.collider.tag == "obstacle")
         {
             Destroy(hit.gameObject);
+
             StartCoroutine(slowTimeDuration());
         }
     }
